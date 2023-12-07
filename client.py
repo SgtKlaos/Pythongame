@@ -1,5 +1,11 @@
 import socket
+import pygame # for various game functionality
 from RPS import * # for Windows getch() keypress funcitonality
+
+window_size = 500
+pygame.init()
+window = pygame.display.set_mode((window_size * 1.75, window_size))
+font = pygame.font.SysFont('Arial', 20)
 
 user_choice = ''
 
@@ -34,3 +40,4 @@ while user_choice != 'q' and result[0:len('A player has disconnected - GAME OVER
 
 # Close the connection
 client_socket.close()
+pygame.quit()
