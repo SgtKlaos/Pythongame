@@ -17,6 +17,7 @@ def playARound(player1_choice, player2_choice):
         print('\n') # for the server
         result = "A player has disconnected - GAME OVER!"
     elif rpsRank.get(player1_choice)[0] == rpsRank.get(player2_choice)[0]%3 + 1: 
+#        result = f"Player 1 chose {rpsRank.get(player1_choice)[1]} - Player 1 wins!"
         result = "Player 1 wins!"
         player1pts += 1
     else:

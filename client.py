@@ -36,9 +36,9 @@ rockimg = pygame.image.load("assets\\rock2.jpg")
 paperimg = pygame.image.load("assets\\paper2.jpg")
 scissorsimg = pygame.image.load("assets\\scissors2.jpg")
 weapon = {
-    'r': rockimg,
-    'p': paperimg,
-    's': scissorsimg
+    rockimg,
+    paperimg,
+    scissorsimg
 }
 
 # Create the Pygame window
@@ -69,19 +69,21 @@ while user_choice != 'q' and result[0:len('A player has disconnected - GAME OVER
     # Receive the game result from the server
     result = client_socket.recv(bufferSize).decode('utf-8')
     print(result)
+
+    # Determine opponent's choice (# 0-3)
     if result == "It's a tie!":
-        opponents_choice = user_choice
-    elif result == "Player 2 wins!":
-        opponents_choice = user_choice
-    elif result == "Player 1 wins!": # lookup what opponent's weapon must be
-        opponents_choice = rpsRank.get(user_choice - player)[0]%3
+        opps_choice = user_choice
+    elif result == "Player 1 wins!":
+#TODO: FINISH FUNCTIONALITY
+        opps_choice = (rpsRank.get(user_choice)[0] - 1 - player)%3 #e.g. returns "rock"
+    elif result == "Player 2 wins!": # lookup what opponent's weapon must be
+#TODO: FINISH FUNCTIONALITY
+        opps_choice = (rpsRank.get(user_choice)[0] - 1 + player)%3
 
-
-    
-    print("BEATS")
-    
     # My opponent's weapon is pasted to the left if it beats mine, to the right if mine beats it
-    screen.blit(weapon[user_choice], (window_width/2 - 768/2 + player * 1000, window_height/2 - 768/2))
+    screen.blit(weapon[opps_choice], (window_width/2 - 768/2 + player * 500, window_height/2 - 768/2))
+#TODO: PRINT TO SCREEN BETWEEN THE IMAGES
+    print("BEATS") #TO SCREEN
 
     # Update the screen with any new graphics
     pygame.display.flip()

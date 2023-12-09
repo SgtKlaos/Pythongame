@@ -7,7 +7,6 @@ rpsRank = {
     'r': (1,"rock"),
     'p': (2,"paper"),
     's': (3,"scissors"),
-    'q': (9,"quit"),
 }
 
 class _Getch:
