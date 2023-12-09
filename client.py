@@ -6,7 +6,6 @@ window_size = 500
 pygame.init()
 window = pygame.display.set_mode((window_size * 1.75, window_size))
 font = pygame.font.SysFont('Arial', 20)
-
 user_choice = ''
 
 # Create a socket object
@@ -20,10 +19,39 @@ print('Connected to the server')
 # Receive welcome message
 start_message1 = client_socket.recv(bufferSize).decode('utf-8')
 print(start_message1)
+# Check for player identity
+if start_message1.find("Player 1") > 0: player = 1
+if start_message1.find("Player 2") > 0: player = -1
 
 # Receive the game start message
 start_message2 = client_socket.recv(bufferSize).decode('utf-8')
 print(start_message2)
+
+# Load the images
+background_image = pygame.image.load("assets\\background2.jpg")
+window_width = 1536
+window_height = 1024
+    # ...into a dictionary
+rockimg = pygame.image.load("assets\\rock2.jpg")
+paperimg = pygame.image.load("assets\\paper2.jpg")
+scissorsimg = pygame.image.load("assets\\scissors2.jpg")
+weapon = {
+    'r': rockimg,
+    'p': paperimg,
+    's': scissorsimg
+}
+
+# Create the Pygame window
+screen = pygame.display.set_mode((window_width, window_height))
+pygame.display.set_caption("Rock / Paper / Scissors - Network Skirmish")
+
+background_image = pygame.transform.scale(background_image, (window_width, window_height))
+screen.blit(background_image, (0, 0))
+
+# Create the Pygame window
+screen = pygame.display.set_mode((window_width, window_height))
+pygame.display.set_caption("Pygame Window with Image Background")
+
 
 while user_choice != 'q' and result[0:len('A player has disconnected - GAME OVER!')] != 'A player has disconnected - GAME OVER!':
     # Get the user's choice - only first character necessary
@@ -34,9 +62,29 @@ while user_choice != 'q' and result[0:len('A player has disconnected - GAME OVER
     # Send the user's choice to the server
     client_socket.sendall(user_choice.encode('utf-8'))
 
+    # My weapon is pasted into the middle of the screen
+    screen.blit(weapon[user_choice], (window_width/2 - 768/2, window_height/2 - 768/2))
+    pygame.display.flip()
+    
     # Receive the game result from the server
     result = client_socket.recv(bufferSize).decode('utf-8')
     print(result)
+    if result == "It's a tie!":
+        opponents_choice = user_choice
+    elif result == "Player 2 wins!":
+        opponents_choice = user_choice
+    elif result == "Player 1 wins!": # lookup what opponent's weapon must be
+        opponents_choice = rpsRank.get(user_choice - player)[0]%3
+
+
+    
+    print("BEATS")
+    
+    # My opponent's weapon is pasted to the left if it beats mine, to the right if mine beats it
+    screen.blit(weapon[user_choice], (window_width/2 - 768/2 + player * 1000, window_height/2 - 768/2))
+
+    # Update the screen with any new graphics
+    pygame.display.flip()
 
 # Close the connection
 client_socket.close()
