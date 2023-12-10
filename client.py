@@ -1,11 +1,17 @@
 import socket
 import pygame # for various game functionality
 from RPS import * # for Windows getch() keypress funcitonality
+import sys
+import os
+
+# Add the path to the pygame folder in your project
+pygame_path = 'C:/Users/jarnold25/Desktop/Pythongame/pygame'
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pygame'))
 
 window_size = 500
 pygame.init()
 window = pygame.display.set_mode((window_size * 1.75, window_size))
-font = pygame.font.SysFont('Arial', 20)
+#font = pygame.font.SysFont('Arial', 20)
 user_choice = ''
 
 # Create a socket object
