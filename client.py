@@ -9,6 +9,9 @@ from RPS import * # for Windows getch() keypress funcitonality
 #sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pygame'))
 
 pygame.init()
+#font = pygame.font.SysFont('Arial', 20)
+user_choice = ''
+opps_choice = 0
 window_scale = .7
 window_width = 1536 * window_scale
 window_height = 1024 * window_scale
@@ -24,9 +27,6 @@ background_image = pygame.transform.scale(background_image, (window_width, windo
 screen.blit(background_image, (0, 0))
 pygame.display.flip()
 
-#font = pygame.font.SysFont('Arial', 20)
-user_choice = ''
-opps_choice = 0
 
 # Create a socket object
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -85,7 +85,6 @@ while user_choice != 'q' and result[0:len('A player has disconnected - GAME OVER
         opps_choice = (rpsRank.get(user_choice)[0] - 1 + player)%3
 
     # My opponent's weapon is pasted to the left if it beats mine, to the right if mine beats it
-    print("---->",opps_choice, "<----")
     screen.blit(weapon[opps_choice], (window_width/2 - 768/2 + player * 500, window_height/2 - 768/2))
 #TODO: PRINT TO SCREEN BETWEEN THE IMAGES
     print("BEATS") #TO SCREEN
