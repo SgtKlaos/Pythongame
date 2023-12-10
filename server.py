@@ -62,10 +62,6 @@ player1_socket.sendall("Both players connected. The game is starting!".encode('u
 player2_socket.sendall("Both players connected. The game is starting!".encode('utf-8'))
 print("Both players connected. The game is starting!")
 
-"""# START GAME - Prime the game loop by receiving choices from both players
-player1_choice = player1_socket.recv(bufferSize).decode('utf-8')
-player2_choice = player2_socket.recv(bufferSize).decode('utf-8')
-"""
 # GAME LOOP
 while player1_choice != 'q' and player2_choice != 'q':
     # Receive choices from both players for the next round

@@ -1,12 +1,6 @@
 import socket
 import pygame # for various game functionality
 from RPS import * # for Windows getch() keypress funcitonality
-#import sys
-#import os
-
-# Add the path to the pygame folder in your project
-#pygame_path = 'C:/Users/jarnold25/Desktop/Pythongame/pygame'
-#sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pygame'))
 
 pygame.init()
 #font = pygame.font.SysFont('Arial', 20)
@@ -48,9 +42,12 @@ start_message2 = client_socket.recv(bufferSize).decode('utf-8')
 print(start_message2)
 
 # Load the weapon images into a dictionary
-rockimg = pygame.image.load("assets/rock2.png")
+rockimg = pygame.transform.scale(pygame.image.load("assets/rock2.png"), (768 * .5 * window_scale, 768 * .5 * window_scale))
 paperimg = pygame.image.load("assets/paper2.png")
 scissorsimg = pygame.image.load("assets/scissors2.png")
+#TODO: use actual size to scale images into window
+imgsize = pygame.display.get_size(scissorsimg) 
+
 weapon = [
     rockimg,
     paperimg,
