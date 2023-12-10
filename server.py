@@ -7,8 +7,8 @@ player1pts = player2pts = 0
 def playARound(player1_choice, player2_choice):
     global player1pts, player2pts
     # Display the choices
-    print('\nPlayer 1 chose:', rpsRank.get(player1_choice)[1])
-    print('Player 2 chose:', rpsRank.get(player2_choice)[1])
+    print('\nPlayer 1 chose:', player1_choice) #rpsRank.get(player1_choice)[1])
+    print('Player 2 chose:', player2_choice) #rpsRank.get(player2_choice)[1])
 
     # Determine the winner
     if player1_choice == player2_choice:
