@@ -1,9 +1,11 @@
 # Rock, Paper, Scissors module
+import pygame
 
 # Global variable declaration
 result = ''
 bufferSize = 1024; # maximum size of transmission to listen for
-rpsRank = {
+
+rpsRank = { # Dictionary, mapping player choice to rank & full word
     'r': (1,"rock"),
     'p': (2,"paper"),
     's': (3,"scissors"),
